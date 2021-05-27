@@ -34,9 +34,9 @@ public class BandService {
 				.stream()
 				.filter(band -> band.getName().startsWith(name))
 				.collect(
-						Collectors.collectingAndThen(Collectors.toList(), result -> {
-							if (result.isEmpty()) throw new BandsNotFoundException("Bands not found");
-							return result;
+						Collectors.collectingAndThen(Collectors.toList(), bandsList -> {
+							if (bandsList.isEmpty()) throw new BandsNotFoundException("Bands not found");
+							return bandsList;
 						}
 				));
 		return bands;
@@ -52,9 +52,9 @@ public class BandService {
 						.getCompareFilter(sortedFilter.getFilterName()).getFilter()
 				)
 				.collect(
-						Collectors.collectingAndThen(Collectors.toList(), result -> {
-							if (result.isEmpty()) throw new BandsNotFoundException("Bands not found");
-							return result;
+						Collectors.collectingAndThen(Collectors.toList(), bandsList -> {
+							if (bandsList.isEmpty()) throw new BandsNotFoundException("Bands not found");
+							return bandsList;
 						}
 				));
 		
