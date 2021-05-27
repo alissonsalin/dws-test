@@ -26,7 +26,7 @@ public class BandsRequester {
           .build();
     }
 
-    public List<Band> findAll() throws Exception {
+    public List<Band> findAll() {
     	List<Band> bands = null;
     	try {
     		//TODO: create a wrapper

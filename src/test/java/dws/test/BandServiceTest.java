@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import dws.test.exception.BandsNotFoundException;
 import dws.test.model.Band;
 import dws.test.service.BandService;
-import dws.teste.exception.BandsNotFoundException;
 
 @SpringBootTest
 public class BandServiceTest {

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import dws.teste.exception.BandNotFoundException;
-import dws.teste.exception.BandsNotFoundException;
+import dws.test.exception.BandNotFoundException;
+import dws.test.exception.BandsNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

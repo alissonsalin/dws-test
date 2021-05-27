@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import dws.test.exception.BandsNotFoundException;
 import dws.test.handler.BandCompareFilterFactory;
 import dws.test.model.Band;
 import dws.test.model.BandSortFilter;
-import dws.teste.exception.BandsNotFoundException;
 
 @Service
 public class BandService {
@@ -23,26 +23,40 @@ public class BandService {
 	private BandCompareFilterFactory bandCompareFilterFactory;
 	
 	@Cacheable("bands")
-	public List<Band> findAll() throws BandsNotFoundException, Exception {
+	public List<Band> findAll() {
 		return Optional.ofNullable(bandsRequester.findAll()).orElseThrow(BandsNotFoundException::new);
 	}
 	
 	
 	@Cacheable("bandsByName")
-	public List<Band> findBandsByName(String name) throws BandsNotFoundException, Exception {
-		List<Band> bands = findAll().stream().filter(band -> band.getName().startsWith(name)).collect(Collectors.toList());
+	public List<Band> findBandsByName(String name) {
+		List<Band> bands = findAll()
+				.stream()
+				.filter(band -> band.getName().startsWith(name))
+				.collect(
+						Collectors.collectingAndThen(Collectors.toList(), result -> {
+							if (result.isEmpty()) throw new BandsNotFoundException("Bands not found");
+							return result;
+						}
+				));
 		return bands;
 	}
 	
 	@Cacheable("bandsByNameSorted")
-	public List<Band> findBandsByNameSorted(String name, BandSortFilter sortedFilter) throws BandsNotFoundException, Exception {
-		List<Band> bands = findAll().stream()
+	public List<Band> findBandsByNameSorted(String name, BandSortFilter sortedFilter) {
+		List<Band> bands = findAll()
+				.stream()
 				.filter(band -> band.getName().toUpperCase().startsWith(name.toUpperCase()))
-				.collect(Collectors.toList());
-		
-        bands = bands.stream()
-        		.sorted(bandCompareFilterFactory.getCompareFilter(sortedFilter.getFilterName()).getFilter())
-        		.collect(Collectors.toList());
+				.sorted(
+					bandCompareFilterFactory
+						.getCompareFilter(sortedFilter.getFilterName()).getFilter()
+				)
+				.collect(
+						Collectors.collectingAndThen(Collectors.toList(), result -> {
+							if (result.isEmpty()) throw new BandsNotFoundException("Bands not found");
+							return result;
+						}
+				));
 		
 		return bands;
 	}

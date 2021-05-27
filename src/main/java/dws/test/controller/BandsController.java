@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dws.test.exception.BandsNotFoundException;
 import dws.test.model.Band;
 import dws.test.model.BandSortFilter;
 import dws.test.service.BandService;
-import dws.teste.exception.BandsNotFoundException;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -28,7 +28,7 @@ public class BandsController {
 	
 	@ApiOperation(value = "Find all the bands")
 	@GetMapping("/bands")
-	public ResponseEntity<List<Band>> findAll() throws BandsNotFoundException, Exception {
+	public ResponseEntity<List<Band>> findAll() {
 		return new ResponseEntity<List<Band>>(bandService.findAll(), HttpStatus.OK);
 	}
 	
@@ -36,14 +36,14 @@ public class BandsController {
 	@GetMapping("/band/{name}/sort/{sortedFilter}")
 	public ResponseEntity<List<Band>> findBandByName(
 			@PathVariable @NotBlank @Size(min=3, message = "Please inform 3 characters") String name, 
-			@PathVariable @NotBlank BandSortFilter sortedFilter) throws BandsNotFoundException, Exception {
+			@PathVariable @NotBlank BandSortFilter sortedFilter)  {
 		return new ResponseEntity<List<Band>>(bandService.findBandsByNameSorted(name, sortedFilter), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Find a band list by starts with name and sort by name")
 	@GetMapping("/band/{name}")
 	public ResponseEntity<List<Band>> findBandByName(
-			@PathVariable @NotBlank @Size(min=3, message = "Please informe 3 characters") String name) throws BandsNotFoundException, Exception {
+			@PathVariable @NotBlank @Size(min=3, message = "Please informe 3 characters") String name) {
 		return new ResponseEntity<List<Band>>(bandService.findBandsByName(name), HttpStatus.OK);
 	}
 }
