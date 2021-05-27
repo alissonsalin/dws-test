@@ -43,7 +43,7 @@ public class BandsController {
 	@ApiOperation(value = "Find a band list by starts with name and sort by name")
 	@GetMapping("/band/{name}")
 	public ResponseEntity<List<Band>> findBandByName(
-			@PathVariable @NotBlank @Size(min=3, message = "Please informe 3 characters") String name) {
+			@PathVariable @NotBlank @Size(min=3, message = "Please inform 3 characters") String name) {
 		return new ResponseEntity<List<Band>>(bandService.findBandsByName(name), HttpStatus.OK);
 	}
 }
