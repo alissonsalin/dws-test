@@ -2,7 +2,7 @@
 
 ## INSTALLATION
 
-Just import the project into Eclipse
+Just import the project into Eclipse or GIT clone
 
 
 ## READ THE CODE
