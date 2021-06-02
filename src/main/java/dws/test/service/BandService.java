@@ -35,7 +35,7 @@ public class BandService {
 				.filter(band -> band.getName().startsWith(name))
 				.collect(
 						Collectors.collectingAndThen(Collectors.toList(), bandsList -> {
-							if (bandsList.isEmpty()) throw new BandsNotFoundException("Bands not found");
+							if (bandsList.isEmpty()) throw new BandsNotFoundException();
 							return bandsList;
 						}
 				));
@@ -53,7 +53,7 @@ public class BandService {
 				)
 				.collect(
 						Collectors.collectingAndThen(Collectors.toList(), bandsList -> {
-							if (bandsList.isEmpty()) throw new BandsNotFoundException("Bands not found");
+							if (bandsList.isEmpty()) throw new BandsNotFoundException();
 							return bandsList;
 						}
 				));
