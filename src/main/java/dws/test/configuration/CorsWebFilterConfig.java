@@ -16,7 +16,6 @@ public class CorsWebFilterConfig {
     CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowedOrigins(Arrays.asList("http://localhost"));
-        corsConfig.setMaxAge(8000L);
         corsConfig.addAllowedMethod("GET");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
