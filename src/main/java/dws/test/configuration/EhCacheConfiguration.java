@@ -38,7 +38,7 @@ public class EhCacheConfiguration {
             .timeToIdleSeconds(cacheTimeToIdleSeconds)           
             .timeToLiveSeconds(cacheTimeToLiveSeconds)        
             .maxEntriesLocalHeap(cacheMaxEntriesLocalHeap)   
-            .memoryStoreEvictionPolicy("LRU")
+            .memoryStoreEvictionPolicy("FIFO")
             .name("bandsByName");
         
         CacheConfiguration ehCacheConfigBandsByNameSorted = new CacheConfiguration()
@@ -46,11 +46,12 @@ public class EhCacheConfiguration {
 	            .timeToIdleSeconds(cacheTimeToIdleSeconds)
 	            .timeToLiveSeconds(cacheTimeToLiveSeconds)
 	            .maxEntriesLocalHeap(cacheMaxEntriesLocalHeap)
-	            .memoryStoreEvictionPolicy("LRU")
+	            .memoryStoreEvictionPolicy("FIFO")
 	            .name("bandsByNameSorted");
          
         cacheManager().getObject().addCache(new Cache(ehCacheConfigBandsByName));
         cacheManager().getObject().addCache(new Cache(ehCacheConfigBandsByNameSorted));
+        
         return new EhCacheCacheManager(cacheManager().getObject());
     }
 }
