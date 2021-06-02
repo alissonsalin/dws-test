@@ -13,7 +13,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
 public class CorsWebFilterConfig {
 
     @Bean
-    CorsWebFilter corsWebFilter() {
+    public CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowedOrigins(Arrays.asList("http://localhost"));
         corsConfig.addAllowedMethod("GET");
