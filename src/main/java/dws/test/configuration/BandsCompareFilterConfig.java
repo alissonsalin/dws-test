@@ -11,7 +11,7 @@ import dws.test.handler.BandCompareFilterFactory;
 @Configuration
 public class BandsCompareFilterConfig {
 
-	@Bean("parserFactory")
+	@Bean("filterFactory")
 	public FactoryBean<?> serviceLocatorFactoryBean() {
 		ServiceLocatorFactoryBean factoryBean = new ServiceLocatorFactoryBean();
 		factoryBean.setServiceLocatorInterface(BandCompareFilterFactory.class);
